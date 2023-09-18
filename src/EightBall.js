@@ -1,16 +1,20 @@
+import { useState } from "react";
+
 const EightBall = (props) =>{
+    const [color, setColor] = useState("black");
+    const [text, setText] = useState("Click to shake...");
     function shakeBall(){
         let answerKeys = Object.keys(props.answers);
         let answer = props.answers[answerKeys[Math.floor(Math.random()*answerKeys.length)]];
         let ball = arguments[0].target;
-        ball.style.backgroundColor = answer.color;
-        ball.innerText = answer.msg;
+        setColor(answer.color);
+        setText(answer.msg);
     }
 
 
     return (
-        <div className="EightBall" onClick={shakeBall}>
-            <p>Click to shake...</p>
+        <div className="EightBall" onClick={shakeBall} style={{backgroundColor:color}}>
+            <p>{text}</p>
         </div>
     )
 }
